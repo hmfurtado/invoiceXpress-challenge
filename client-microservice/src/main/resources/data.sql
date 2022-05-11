@@ -1,0 +1,10 @@
+insert into client (id, name, email, fiscal_id) values (1, 'Demetria', 'dlooby0@jiathis.com', 59184);
+insert into client (id, name, email, fiscal_id) values (2, 'Eleni', 'erawcliffe1@flickr.com', 405563);
+insert into client (id, name, email, fiscal_id) values (3, 'Yoshi', 'yarrighini2@histats.com', 564815);
+insert into client (id, name, email, fiscal_id) values (4, 'Merla', 'mshurmore3@netscape.com', 561053);
+insert into client (id, name, email, fiscal_id) values (5, 'Torrey', 'thuriche4@accuweather.com', 322682);
+insert into client (id, name, email, fiscal_id) values (6, 'Petronella', 'pleckey5@last.fm', 322157);
+insert into client (id, name, email, fiscal_id) values (7, 'Norene', 'nleddy6@odnoklassniki.ru', 476771);
+insert into client (id, name, email, fiscal_id) values (8, 'Noach', 'nshervil7@abc.net.au', 149893);
+insert into client (id, name, email, fiscal_id) values (9, 'Grover', 'gmathieu8@cocolog-nifty.com', 208351);
+insert into client (id, name, email, fiscal_id) values (10, 'Brigit', 'bgascoyne9@ucoz.com', 299917);

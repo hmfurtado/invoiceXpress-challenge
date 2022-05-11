@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  bahamas:
+    container_name: bahamas-gov
+    build:
+      context: ./bahamas-gov
+      dockerfile: Dockerfile
+    ports:
+      - '8082:8082'
+    networks:
+      - host
+  client:
+    container_name: client
+    build:
+      context: ./client-microservice
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'
+    networks:
+      - host
+  invoice:
+    container_name: invoice-microservice
+    build:
+      context: ./invoice-microservice
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - '8080:8080'
+    networks:
+      - host
+    depends_on:
+      - client
+      - bahamas
+networks:
+  host:
+    driver: bridge
