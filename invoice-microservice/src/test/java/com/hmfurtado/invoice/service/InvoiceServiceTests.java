@@ -107,10 +107,20 @@ class InvoiceServiceTests {
         when(repository.findByIdInvoiceId(any())).thenReturn(Arrays.asList(entity));
         when(clientFeign.retrieveClient(any())).thenThrow(new FeignException.NotFound(null, requestGet,
                 null, null));
-        InvoiceDTO result = service.retrieveClient(1L);
-        InvoiceDTO expected = InvoiceDTO.builder().invoiceId(1L).
-                clientDTO(Stream.of(new ClientDTO()).collect(Collectors.toSet())).build();
-        assertEquals(expected, result);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class,
+                () -> service.retrieveClient(1L));
+        assertEquals("404 NOT_FOUND \"Client not found\"", exception.getMessage());
+    }
+
+    @Test
+    void retrieveClientNotWorkingTest() {
+        when(repository.findByIdInvoiceId(any())).thenReturn(Arrays.asList(entity));
+        when(clientFeign.retrieveClient(any()))
+                .thenThrow(new RetryableException(500, "error", Request.HttpMethod.GET,
+                        Date.from(Calendar.getInstance().getTime().toInstant()), requestGet));
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class,
+                () -> service.retrieveClient(1L));
+        assertEquals("502 BAD_GATEWAY \"Cannot get client\"", exception.getMessage());
     }
 
     @Test
@@ -128,6 +138,7 @@ class InvoiceServiceTests {
 
     @Test
     void createInvoiceOkTest() {
+        when(clientFeign.retrieveClient(any())).thenReturn(clientDTO);
         when(repository.existsById(any())).thenReturn(false);
         when(repository.findByIdInvoiceId(any())).thenReturn(new ArrayList<>());
         String result = service.createInvoice(1L, 1L, "Paul", "paul@beatles.com");

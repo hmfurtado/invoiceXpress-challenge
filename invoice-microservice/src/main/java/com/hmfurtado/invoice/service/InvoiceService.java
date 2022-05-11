@@ -56,6 +56,8 @@ public record InvoiceService(InvoiceRepository repository,
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "This invoice already have 2 different clients");
         }
+        //checking if client exists
+        retrieveClientFromClientMicroservice(fiscalId);
 
         repository.save(InvoiceEntity.builder().id(invoicePk).build());
         log.info("Invoice created: {}, Client Fiscal id: {}",
@@ -82,12 +84,14 @@ public record InvoiceService(InvoiceRepository repository,
         try {
             return (clientFeign.retrieveClient(clientFiscalId));
         } catch (FeignException.NotFound e) {
-            log.info("Client does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Client not found");
         } catch (RetryableException e) {
             log.error(e.getMessage());
+            log.error("Error retrieving client from client microservice. Client fiscal id: {}", clientFiscalId);
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY,
+                    "Cannot get client");
         }
-        log.error("Error retrieving client from client microservice. Client fiscal id: {}", clientFiscalId);
-        return new ClientDTO();
     }
 
 }
