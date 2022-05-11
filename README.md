@@ -107,3 +107,4 @@ I made 3 microservices:
         * For invoices with one or no customers and avoiding duplicate records
         * For clients that exists in the Client Microservice
         * Submitting tax deductions to the Bahamas Government API after registering a customer on the invoice
+    * API to return clients by Invoice Id
