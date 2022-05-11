@@ -86,10 +86,10 @@ ___
 ___
     docker compose up
 
-This will up 3 containers:
-* Bahamas API
-* Client Microservice
-* Invoice Microservice
+This will start 3 containers:
+* Bahamas API (localhost::8082)
+* Client Microservice (localhost::8081)
+* Invoice Microservice (localhost::8080)
 
 ## Solutions
 ___ 
@@ -106,5 +106,5 @@ I made 3 microservices:
     * Allows to register a client for a Invoice:
         * For invoices with one or no customers and avoiding duplicate records
         * For clients that exists in the Client Microservice
-        * Submitting tax deductions to the Bahamas Government API after registering a customer on the invoice
+        * Submitting tax deductions to the Bahamas Government API after registering a customer on the invoice, just as requested
     * API to return clients by Invoice Id
