@@ -48,7 +48,7 @@ ___
 ![](https://media1.giphy.com/media/Thq0hatwUPaSKqZ4Eg/giphy.gif?cid=790b76115c2ad4ff49d899f8ab30587a3d6176bc6f56cbeb&rid=giphy.gif&ct=g)
 * Get Client By Fiscal Id
   ###### (Client Microservice - localhost:8081/client/fiscalId)
-![](https://media0.giphy.com/media/ozYGhPvm5lESncz8oA/giphy.gif?cid=790b7611e7f6dc0bffc6e8ed55eabfc6b52d3ddca7d86f4f&rid=giphy.gif&ct=g)
+![](https://media1.giphy.com/media/Thq0hatwUPaSKqZ4Eg/giphy.gif?cid=790b76111401e44b5672b20d772661502384aecea4a1ef92&rid=giphy.gif&ct=g)
 * Retrieve Invoice
   ###### (Invoice Microservice - Main Microservice - localhost:8080/retrieve-bahamas-client)
 ![](https://media1.giphy.com/media/bxbH3amGd79Bqqvhmi/giphy.gif?cid=790b76118c0506e1c6a28475e8cf89ebc8de99cd4a1637b0&rid=giphy.gif&ct=g)
