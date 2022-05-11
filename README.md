@@ -53,7 +53,7 @@ ___
   ###### (Invoice Microservice - Main Microservice - localhost:8080/retrieve-bahamas-client)
 ![](https://media1.giphy.com/media/bxbH3amGd79Bqqvhmi/giphy.gif?cid=790b76118c0506e1c6a28475e8cf89ebc8de99cd4a1637b0&rid=giphy.gif&ct=g)
 * Register Invoice
-  ###### (Invoice Microservice - Main Microservice - http://localhost:8080/store-bahamas-client)
+  ###### (Invoice Microservice - Main Microservice - localhost:8080/store-bahamas-client)
 ![](https://media4.giphy.com/media/RFya14lExDciw0QZkD/giphy.gif?cid=790b761172b18233c02b5271a506961dbb2445e5fa6a35dd&rid=giphy.gif&ct=g)
 
 ### RDBMS
