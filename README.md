@@ -93,17 +93,15 @@ This will start 3 containers:
 
 ## Solutions
 ___ 
-I made 3 microservices:
+I build 3 microservices:
 
 * Bahamas API
-    * Simulating an External API from Bahamas Government Tax Dedutions
+    * Simulating an External API from Bahamas Government Tax Deductions
 * Client Microservice
-
     * Internal or External APIs for creating and getting a client
 * Invoice Microservice
-
     * The main microservice
-    * Allows to register a client for a Invoice:
+    * Allows to register a client for an Invoice:
         * For invoices with one or no customers and avoiding duplicate records
         * For clients that exists in the Client Microservice
         * Submitting tax deductions to the Bahamas Government API after registering a customer on the invoice, just as requested

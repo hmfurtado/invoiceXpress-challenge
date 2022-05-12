@@ -139,7 +139,6 @@ class InvoiceServiceTests {
     @Test
     void createInvoiceOkTest() {
         when(clientFeign.retrieveClient(any())).thenReturn(clientDTO);
-        when(repository.existsById(any())).thenReturn(false);
         when(repository.findByIdInvoiceId(any())).thenReturn(new ArrayList<>());
         String result = service.createInvoice(1L, 1L, "Paul", "paul@beatles.com");
         assertEquals("Invoice registration successful: 1", result);
@@ -147,7 +146,7 @@ class InvoiceServiceTests {
 
     @Test
     void createInvoiceAlreadyExistsTest() {
-        when(repository.existsById(any())).thenReturn(true);
+        when(repository.findByIdInvoiceId(any())).thenReturn(Arrays.asList(entity));
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () ->
                 service.createInvoice(1L, 1L, "Paul", "paul@beatles.com"));
         assertEquals("400 BAD_REQUEST \"Invoice already registered for client\"", exception.getMessage());
@@ -157,8 +156,7 @@ class InvoiceServiceTests {
     void createInvoiceAlreadyHasTwoClientsTest() {
         InvoiceEntity entity = InvoiceEntity.builder().id(new InvoicePK()).build();
         List<InvoiceEntity> list = Arrays.asList(entity, entity, entity);
-        when(repository.existsById(any())).thenReturn(false);
-        when(repository.findByIdInvoiceId(any())).thenReturn(list);
+        when(repository.findByIdInvoiceId(any())).thenReturn(Arrays.asList(new InvoiceEntity(), new InvoiceEntity()));
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () ->
                 service.createInvoice(1L, 1L, "Paul", "paul@beatles.com"));
         assertEquals("400 BAD_REQUEST \"This invoice already have 2 different clients\"", exception.getMessage());
@@ -166,7 +164,6 @@ class InvoiceServiceTests {
 
     @Test
     void createInvoiceBahamasApiErrorTest() {
-        when(repository.existsById(any())).thenReturn(false);
         when(repository.findByIdInvoiceId(any())).thenReturn(new ArrayList<>());
         when(bahamasGovFeign.register(any(), any(), any(), any()))
                 .thenThrow(new RetryableException(500, "error", Request.HttpMethod.GET,

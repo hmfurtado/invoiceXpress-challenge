@@ -46,15 +46,17 @@ public record InvoiceService(InvoiceRepository repository,
                 .invoiceId(invoiceId)
                 .clientFiscalId(fiscalId)
                 .build();
-        //avoid duplicates from same invoice and client
-        if (repository.existsById(invoicePk)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Invoice already registered for client");
-        }
+
+        List<InvoiceEntity> invoices = repository.findByIdInvoiceId(invoiceId);
         //check if invoice already has 2 or more clients
-        if (repository.findByIdInvoiceId(invoiceId).size() >= 2) {
+        if (invoices.size() >= 2) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "This invoice already have 2 different clients");
+        }
+        //avoid duplicates from same invoice and client
+        if (invoices.stream().anyMatch(r -> r.getId().getInvoiceId().equals(invoiceId))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Invoice already registered for client");
         }
         //checking if client exists
         retrieveClientFromClientMicroservice(fiscalId);
