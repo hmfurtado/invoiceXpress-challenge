@@ -93,7 +93,7 @@ This will start 3 containers:
 
 ## Solutions
 ___ 
-I build 3 microservices:
+I built 3 microservices:
 
 * Bahamas API
     * Simulating an External API from Bahamas Government Tax Deductions
